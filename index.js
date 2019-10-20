@@ -1,20 +1,14 @@
 module.exports = (chain) => {
-  const values = []
-  while (chain.next) {
-    values.push(chain.val)
-    chain = chain.next
+  let link = chain
+  let parent = { val: chain.val, next: null }
+  let next = link.next
+
+  while (next) {
+    link = next
+    next = link.next
+    link.next = parent
+    parent = link
   }
-  values.push(chain.val)
-  const res = {}
-  let link = res
-  values.reverse().forEach((val, i) => {
-    link.val = val
-    if (i !== values.length - 1) {
-      link.next = {}
-      link = link.next
-    } else {
-      link.next = null
-    }
-  })
-  return res
+  
+  return link
 }
