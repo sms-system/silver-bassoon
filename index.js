@@ -1,7 +1,6 @@
 module.exports = (chain) => {
-  let link = chain
-  let parent = { val: chain.val, next: null }
-  let next = link.next
+  let link, next = chain
+  let parent = null
 
   while (next) {
     link = next
